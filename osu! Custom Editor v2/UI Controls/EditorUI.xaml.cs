@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Point = System.Drawing.Point;
+using OsuBeatmapParser.Beatmaps.Objects;
 
 namespace osu__Custom_Editor_v2
 {
@@ -95,10 +97,15 @@ namespace osu__Custom_Editor_v2
 
         public Task LoadBackground()
         {
-            string bg = Editor.Beatmap.EventsSection.BackgroundImage;
-            string bgpath = $@"{Editor.FolderPath}\{bg}";
-            if (bg != string.Empty)
-                BackgroundImage = bgpath;
+            if (Editor.Beatmap != null)
+            {
+                string bg = Editor.Beatmap.EventsSection.BackgroundImage;
+                string bgpath = $@"{Editor.FolderPath}\{bg}";
+                if (bg != string.Empty)
+                    BackgroundImage = bgpath;
+                else
+                    Output?.Invoke(this, "No background image to load.");
+            }
             else
                 Output?.Invoke(this, "No beatmap loaded.");
             return Task.CompletedTask;
