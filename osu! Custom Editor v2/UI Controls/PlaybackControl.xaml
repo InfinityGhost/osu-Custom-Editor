@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="osu__Custom_Editor_v2.PlaybackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:osu__Custom_Editor_v2"
+             mc:Ignorable="d" 
+             d:DesignWidth="1800" d:DesignHeight="40">
+    <Grid>
+        <Rectangle Fill="#7F000000" Stroke="White" Margin="-1"/>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="20,0,0,0"/>
+                    <Setter Property="Background" Value="{x:Null}"/>
+                    <Setter Property="Foreground" Value="{x:Null}"/>
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+                </Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Margin" Value="-2"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Button  VerticalAlignment="Center" x:Name="PauseButton" Click="PauseButtonClick">
+                <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/pause.png"/>
+            </Button>
+            <Button VerticalAlignment="Center" x:Name="PlayButton" Click="PlayButtonClick">
+                <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/play.png"/>
+            </Button>
+            <Button VerticalAlignment="Center" x:Name="StopButton" Click="StopButtonClick">
+                <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/stop.png"/>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

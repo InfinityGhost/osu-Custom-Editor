@@ -73,26 +73,6 @@ namespace osu__Custom_Editor_v2
 
         #endregion
 
-        #region Playback Controls
-
-
-        void PauseButtonClick(object sender, RoutedEventArgs e)
-        {
-            Output?.Invoke(sender, "Clicked");
-        }
-
-        void PlayButtonClick(object sender, RoutedEventArgs e)
-        {
-            Output?.Invoke(sender, "Clicked");
-        }
-
-        void StopButtonClick(object sender, RoutedEventArgs e)
-        {
-            Output?.Invoke(sender, "Clicked");
-        }
-
-        #endregion
-
         #region Methods
 
         public Task LoadBackground()
@@ -111,30 +91,45 @@ namespace osu__Custom_Editor_v2
             return Task.CompletedTask;
         }
 
+        #endregion
+
+        #region Playback Control
+
+        // TBA
+
+        #endregion
+
+        #region Commmands
+
+        void HandleCommand(object sender, string command)
+        {
+            
+        }
+
+        #endregion
+
+        #region Elements
+
         public Task LoadElement(int time)
         {
-            Screen.Children.Clear();
+            Field.Children.Clear();
             var obj = Editor.Beatmap.HitObjects.Find(e => e.StartTime == time) ?? null;
             if (obj != null)
             {
-                var shape = new Ellipse
-                {
-                    Width = 100,
-                    Height = 100,
-                };
-                Screen.Children.Add(shape);
+                var shape = new Visual.Circle(obj);
+                var element = shape.Object;
+                Field.Children.Add(element);
+                MoveElement(element, obj.Position);
             }
             return Task.CompletedTask;
         }
 
-        public Task MoveElement(object element, Point position)
+        public Task MoveElement(UIElement element, Point position)
         {
-            Canvas.SetLeft(Screen, position.X);
-            Canvas.SetTop(Screen, position.Y);
+            Canvas.SetLeft(element, position.X);
+            Canvas.SetTop(element, position.Y);
             return Task.CompletedTask;
         }
-
-        #endregion
 
         public class Visual
         {
@@ -143,12 +138,34 @@ namespace osu__Custom_Editor_v2
                 public Circle(HitObject obj)
                 {
                     Position = obj.Position;
+                }
+
+                public Circle(HitObject obj, int cs)
+                {
+                    Position = obj.Position;
 
                 }
 
-                Point Position { set; get; }
+                public Point Position { set; get; }
 
+                public double Size { set; get; }
+
+                public UIElement Object => new Ellipse
+                {
+                    Width = Size,
+                    Height = Size,
+                };
             }
         }
+
+        private void Field_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // TODO: add field scaling
+            Canvas canvas = sender as Canvas;
+        }
+
+        #endregion
+
+
     }
 }

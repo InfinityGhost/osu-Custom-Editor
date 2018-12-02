@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace osu__Custom_Editor_v2
+namespace osu__Custom_Editor_v2.Tools
 {
-    public class Tool
+    public class ColorHelper
     {
         public static Brush StringToBrush(string RGB)
         {

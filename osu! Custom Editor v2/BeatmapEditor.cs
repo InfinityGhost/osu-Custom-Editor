@@ -22,8 +22,8 @@ namespace osu__Custom_Editor_v2
 
         public event EventHandler<string> Output;
 
-        public string FolderPath => Filename.Replace(Filename.Split('\\').LastOrDefault(), string.Empty);
-        public string Filename { get; set; }
+        public string FolderPath => Path.Replace(Path.Split('\\').LastOrDefault(), string.Empty);
+        public string Path { get; set; }
         public Beatmap Beatmap { get; set; }
 
         #endregion
@@ -34,7 +34,7 @@ namespace osu__Custom_Editor_v2
         {
             Beatmap = Parser.ParseBeatmap(filePath);
             Output?.Invoke(this, "Beatmap file \"" + filePath + "\" loaded.");
-            Filename = filePath;
+            Path = filePath;
             return Task.CompletedTask;
         }
 

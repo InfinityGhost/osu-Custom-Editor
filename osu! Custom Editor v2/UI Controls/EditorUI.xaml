@@ -13,38 +13,14 @@
     </UserControl.Resources>
 
     <Grid Background="Black">
-        <Image x:Name="mapbg" Margin="0,18,0,0" Stretch="Uniform" Source="/osu! Custom Editor v2;component/Assets/EditorImages/DefaultBackground.png"/>
-        <Grid VerticalAlignment="Top" Height="40" Margin="0,18,0,0">
-            <Rectangle Fill="#7F000000" Stroke="White" Margin="-1"/>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Margin" Value="20,0,0,0"/>
-                        <Setter Property="Background" Value="{x:Null}"/>
-                        <Setter Property="Foreground" Value="{x:Null}"/>
-                        <Setter Property="BorderBrush" Value="{x:Null}"/>
-                        <Setter Property="HorizontalAlignment" Value="Left"/>
-                    </Style>
-                    <Style TargetType="{x:Type Image}">
-                        <Setter Property="Margin" Value="-2"/>
-                    </Style>
-                </StackPanel.Resources>
-                
-                <Button  VerticalAlignment="Center" x:Name="PauseButton" Click="PauseButtonClick">
-                    <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/pause.png"/>
-                </Button>
-                <Button VerticalAlignment="Center" x:Name="PlayButton" Click="PlayButtonClick">
-                    <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/play.png"/>
-                </Button>
-                <Button VerticalAlignment="Center" x:Name="StopButton" Click="StopButtonClick">
-                    <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/stop.png"/>
-                </Button>
-                
-            </StackPanel>
-        </Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Tools"/>
         </Menu>
-        <Canvas x:Name="Screen"/>
+        <Grid Margin="0,18,0,0">
+            <Image x:Name="mapbg" Stretch="Uniform" Source="/osu! Custom Editor v2;component/Assets/EditorImages/DefaultBackground.png"/>
+            <local:PlaybackControl VerticalAlignment="Top" Height="40" Output="Editor_Output"/>
+            <Canvas x:Name="Field" Margin="0,40,0,18" Width="640" Height="480" SizeChanged="Field_SizeChanged"/>
+            <local:CommandBox VerticalAlignment="Bottom" Height="18" CommandOutput="Editor_Output"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -32,10 +32,7 @@ namespace osu__Custom_Editor_v2
             Output(sender, "Loaded.");
 
             if (Debugger.IsAttached)
-            {
                 DebuggingMenu.SetValue(VisibilityProperty, Visibility.Visible);
-            }
-
         }
 
         #region Variables & Events
@@ -47,11 +44,7 @@ namespace osu__Custom_Editor_v2
         #region Console
 
         public async void Output(object sender, string text) => await Output(sender.GetType().Name + ": " + text);
-        private async Task Output(string text)
-        {
-            await Console.Log(text);
-            
-        }
+        private async Task Output(string text) => await Console.Log(text);
 
         public async void Status(object sender, string text) => await Status(text);
         public Task Status(string text)
@@ -108,18 +101,6 @@ namespace osu__Custom_Editor_v2
         public async Task SaveFile(string filename)
         {
             
-        }
-
-        #endregion
-
-        #region Tools
-
-        public async Task UpdateVariable(object sender, object newValue)
-        {
-            await Dispatcher.BeginInvoke(new Action(() =>
-            {
-                sender = newValue;
-            }));
         }
 
         #endregion
