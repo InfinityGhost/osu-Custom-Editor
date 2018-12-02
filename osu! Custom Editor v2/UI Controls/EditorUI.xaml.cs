@@ -35,6 +35,7 @@ namespace osu__Custom_Editor_v2
         public async Task Load(string filename)
         {
             await Editor.Load(filename);
+            await LoadBackground();
         }
 
         public async Task Save(string filename)
@@ -55,7 +56,7 @@ namespace osu__Custom_Editor_v2
 
         #region Properties
 
-        public string BackgroundPath
+        public string BackgroundImage
         {
             set
             {
@@ -70,6 +71,19 @@ namespace osu__Custom_Editor_v2
 
         #endregion
 
+        #region Methods
 
+        public Task LoadBackground()
+        {
+            string bg = Editor.Beatmap.EventsSection.BackgroundImage;
+            string bgpath = $@"{Editor.FolderPath}\{bg}";
+            if (bg != string.Empty)
+                BackgroundImage = bgpath;
+            else
+                Output?.Invoke(this, "No background image to load.");
+            return Task.CompletedTask;
+        }
+
+        #endregion
     }
 }

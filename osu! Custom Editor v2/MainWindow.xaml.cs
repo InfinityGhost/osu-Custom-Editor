@@ -137,9 +137,10 @@ namespace osu__Custom_Editor_v2
             await Editor.Load(@"E:\osu!\Songs\785731 S3RL - Catchit (Radio Edit)\S3RL - Catchit (Radio Edit) (StarrStyx) [Insane].osu");
         }
 
-        void GetBGImage(object sender, RoutedEventArgs e)
+        async void GetBGImage(object sender, RoutedEventArgs e)
         {
-
+            await Editor.LoadBackground();
+            await Output(Editor.BackgroundImage);
         }
 
         #endregion
