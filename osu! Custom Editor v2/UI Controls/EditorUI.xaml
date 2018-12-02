@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
     <Grid Background="Black">
-        <Image x:Name="mapbg" Margin="0,18,0,0" Stretch="Uniform" />
+        <Image x:Name="mapbg" Margin="0,18,0,0" Stretch="Uniform" Source="/osu! Custom Editor v2;component/Assets/EditorImages/DefaultBackground.png"/>
         <Grid VerticalAlignment="Top" Height="40" Margin="0,18,0,0">
             <Rectangle Fill="#7F000000" Stroke="White" Margin="-1"/>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
@@ -29,15 +29,17 @@
                         <Setter Property="Margin" Value="-2"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button  VerticalAlignment="Center">
+                
+                <Button  VerticalAlignment="Center" x:Name="PauseButton" Click="PauseButtonClick">
                     <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/pause.png"/>
                 </Button>
-                <Button VerticalAlignment="Center">
+                <Button VerticalAlignment="Center" x:Name="PlayButton" Click="PlayButtonClick">
                     <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/play.png"/>
                 </Button>
-                <Button VerticalAlignment="Center">
+                <Button VerticalAlignment="Center" x:Name="StopButton" Click="StopButtonClick">
                     <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/stop.png"/>
                 </Button>
+                
             </StackPanel>
         </Grid>
         <Menu VerticalAlignment="Top">

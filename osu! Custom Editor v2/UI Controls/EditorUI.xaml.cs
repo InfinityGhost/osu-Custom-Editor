@@ -71,6 +71,26 @@ namespace osu__Custom_Editor_v2
 
         #endregion
 
+        #region Playback Controls
+
+
+        void PauseButtonClick(object sender, RoutedEventArgs e)
+        {
+            Output?.Invoke(sender, "Clicked");
+        }
+
+        void PlayButtonClick(object sender, RoutedEventArgs e)
+        {
+            Output?.Invoke(sender, "Clicked");
+        }
+
+        void StopButtonClick(object sender, RoutedEventArgs e)
+        {
+            Output?.Invoke(sender, "Clicked");
+        }
+
+        #endregion
+
         #region Methods
 
         public Task LoadBackground()
@@ -80,10 +100,48 @@ namespace osu__Custom_Editor_v2
             if (bg != string.Empty)
                 BackgroundImage = bgpath;
             else
-                Output?.Invoke(this, "No background image to load.");
+                Output?.Invoke(this, "No beatmap loaded.");
+            return Task.CompletedTask;
+        }
+
+        public Task LoadElement(int time)
+        {
+            Screen.Children.Clear();
+            var obj = Editor.Beatmap.HitObjects.Find(e => e.StartTime == time) ?? null;
+            if (obj != null)
+            {
+                var shape = new Ellipse
+                {
+                    Width = 100,
+                    Height = 100,
+                };
+                Screen.Children.Add(shape);
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task MoveElement(object element, Point position)
+        {
+            Canvas.SetLeft(Screen, position.X);
+            Canvas.SetTop(Screen, position.Y);
             return Task.CompletedTask;
         }
 
         #endregion
+
+        public class Visual
+        {
+            public class Circle
+            {
+                public Circle(HitObject obj)
+                {
+                    Position = obj.Position;
+
+                }
+
+                Point Position { set; get; }
+
+            }
+        }
     }
 }

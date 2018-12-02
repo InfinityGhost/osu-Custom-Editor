@@ -127,5 +127,8 @@
   <ItemGroup>
     <Resource Include="Assets\PlaybackControl\stop.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\EditorImages\DefaultBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
