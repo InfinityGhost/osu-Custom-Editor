@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace osu__Custom_Editor_v2
 {
@@ -28,15 +29,22 @@ namespace osu__Custom_Editor_v2
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Editor.Output += Output;
+            Output(sender, "Loaded.");
+
+            if (Debugger.IsAttached)
+            {
+                DebuggingMenu.SetValue(VisibilityProperty, Visibility.Visible);
+            }
+
         }
 
         #region Variables & Events
 
+        // TBA
+
         #endregion
 
         #region Console
-
-        private string OutputPrefix => ">";
 
         public async void Output(object sender, string text) => await Output(sender.GetType().Name + ": " + text);
         private async Task Output(string text)
@@ -119,6 +127,20 @@ namespace osu__Custom_Editor_v2
         #region Misc.
 
         void ExitButton(object sender, RoutedEventArgs e) => Close();
+
+        #endregion
+
+        #region Tests
+
+        async void LoadTestFile(object sender, RoutedEventArgs e)
+        {
+            await Editor.Load(@"E:\osu!\Songs\785731 S3RL - Catchit (Radio Edit)\S3RL - Catchit (Radio Edit) (StarrStyx) [Insane].osu");
+        }
+
+        void GetBGImage(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         #endregion
 

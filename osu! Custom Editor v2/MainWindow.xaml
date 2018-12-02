@@ -23,6 +23,14 @@
                 <MenuItem Header="Save..." Click="SaveFile"/>
                 <MenuItem Header="Exit" Click="ExitButton"/>
             </MenuItem>
+
+            <MenuItem Header="Debugging" x:Name="DebuggingMenu" Visibility="Hidden">
+                <MenuItem Header="Tests">
+                    <MenuItem Header="Load test file" Click="LoadTestFile"/>
+                    <MenuItem Header="Get background image" Click="GetBGImage"/>
+                </MenuItem>
+            </MenuItem>
+            
         </Menu>
         
         <TabControl Margin="0,18">
