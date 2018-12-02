@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:osu__Custom_Editor_v2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="{x:Type Menu}">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="{x:Type StatusBar}">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Menu VerticalAlignment="Top" Background="White">
+            <MenuItem Header="File">
+                <MenuItem Header="About..."/>
+                <MenuItem Header="Load..." Click="LoadFile"/>
+                <MenuItem Header="Save..." Click="SaveFile"/>
+                <MenuItem Header="Exit" Click="ExitButton"/>
+            </MenuItem>
+        </Menu>
         
+        <TabControl Margin="0,18">
+            <TabItem Header="Main">
+                <local:EditorUI x:Name="Editor"/>
+            </TabItem>
+            <TabItem Header="Console">
+                <local:Console x:Name="Console"/>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar VerticalAlignment="Bottom" Height="18" Background="White">
+            <TextBlock x:Name="StatusBlock" Margin="0,-2"/>
+        </StatusBar>
     </Grid>
 </Window>

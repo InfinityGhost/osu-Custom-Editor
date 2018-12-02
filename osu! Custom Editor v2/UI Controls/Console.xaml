@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="osu__Custom_Editor_v2.Console"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:osu__Custom_Editor_v2"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Menu}">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontFamily" Value="Lucida Console"/>
+            </Style>
+        </Grid.Resources>
+
+        <Menu>
+            <MenuItem Header="Console">
+                <MenuItem Header="Copy" Click="CopyButton"/>
+                <MenuItem Header="Clear" Click="ClearButton"/>
+            </MenuItem>
+        </Menu>
+
+        <TextBlock x:Name="ConsoleBlock" Margin="0,18,0,0">
+            <TextBlock.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy" Click="CopyButton"/>
+                    <MenuItem Header="Clear" Click="ClearButton"/>
+                </ContextMenu>
+            </TextBlock.ContextMenu>
+        </TextBlock>
+
+    </Grid>
+</UserControl>
