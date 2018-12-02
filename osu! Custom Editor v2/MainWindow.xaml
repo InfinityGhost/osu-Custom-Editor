@@ -30,7 +30,7 @@
                 <local:EditorUI x:Name="Editor"/>
             </TabItem>
             <TabItem Header="Console">
-                <local:Console x:Name="Console"/>
+                <local:Console x:Name="Console" Update="Status"/>
             </TabItem>
         </TabControl>
 

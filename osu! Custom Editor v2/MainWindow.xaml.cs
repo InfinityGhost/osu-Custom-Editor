@@ -25,12 +25,10 @@ namespace osu__Custom_Editor_v2
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Console.Update += Console_Update;
+            Editor.Output += Output;
         }
-
-        private async void Console_Update(object sender, string e) => await Status(e);
 
         #region Variables & Events
 
@@ -47,6 +45,7 @@ namespace osu__Custom_Editor_v2
             
         }
 
+        public async void Status(object sender, string text) => await Status(text);
         public Task Status(string text)
         {
             Dispatcher.BeginInvoke(new Action(() =>

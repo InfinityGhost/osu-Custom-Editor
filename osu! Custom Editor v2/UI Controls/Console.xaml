@@ -26,7 +26,7 @@
             </MenuItem>
         </Menu>
 
-        <TextBlock x:Name="ConsoleBlock" Margin="0,18,0,0">
+        <TextBlock x:Name="ConsoleBlock" Margin="0,18,0,0" Padding="2">
             <TextBlock.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Click="CopyButton"/>
