@@ -215,7 +215,7 @@ namespace osu__Custom_Editor_v2
                 public double Size { set; get; }
                 public Brush Color { set; get; }
 
-                public double ScaledSize => 32 * (1 - 0.7 * (Size - 5) / 5);
+                public double ScaledSize => (32 * (1 - 0.7 * (Size - 5) / 5)) * 2;
 
                 public virtual UIElement Element => new Rectangle
                 {
