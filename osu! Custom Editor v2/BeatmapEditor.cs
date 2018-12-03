@@ -22,8 +22,8 @@ namespace osu__Custom_Editor_v2
 
         public event EventHandler<string> Output;
 
-        public string FolderPath => Path.Replace(Path.Split('\\').LastOrDefault(), string.Empty);
-        public string Path { get; set; }
+        public string FolderPath => System.IO.Path.GetDirectoryName(Path);
+        public string Path { get; private set; }
         public Beatmap Beatmap { get; set; }
 
         #endregion
