@@ -180,13 +180,7 @@ namespace osu__Custom_Editor_v2
                 var element = shape.Element;
                 Field.Children.Add(element);
 
-                var position = new Point
-                {
-                    X = Convert.ToInt32(shape.Position.X - shape.Diameter /2.0),
-                    Y = Convert.ToInt32(shape.Position.Y - shape.Diameter /2.0)
-                };
-
-                MoveElement(element, position);
+                MoveElement(element, shape.CenterPos);
                 Output?.Invoke(element, $"Object rendered.");
             }
             else
@@ -216,6 +210,12 @@ namespace osu__Custom_Editor_v2
                 public Brush Color { set; get; }
 
                 public double Diameter => (32 * (1 - 0.7 * (Size - 5) / 5)) * 2;
+
+                public Point CenterPos => new Point
+                {
+                    X = Convert.ToInt32(Position.X - Size / 2),
+                    Y = Convert.ToInt32(Position.Y - Size / 2),
+                };
 
                 public virtual UIElement Element => new Rectangle
                 {
@@ -279,12 +279,6 @@ namespace osu__Custom_Editor_v2
                     StrokeThickness = Size / 16,
                 };
             }
-        }
-
-        private void Field_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            // TODO: add field scaling
-            Canvas canvas = sender as Canvas;
         }
 
         #endregion
