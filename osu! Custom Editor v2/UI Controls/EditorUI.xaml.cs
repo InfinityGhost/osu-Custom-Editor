@@ -182,8 +182,8 @@ namespace osu__Custom_Editor_v2
 
                 var position = new Point
                 {
-                    X = Convert.ToInt32(shape.Position.X - shape.ScaledSize /2.0),
-                    Y = Convert.ToInt32(shape.Position.Y - shape.ScaledSize /2.0)
+                    X = Convert.ToInt32(shape.Position.X - shape.Diameter /2.0),
+                    Y = Convert.ToInt32(shape.Position.Y - shape.Diameter /2.0)
                 };
 
                 MoveElement(element, position);
@@ -215,15 +215,15 @@ namespace osu__Custom_Editor_v2
                 public double Size { set; get; }
                 public Brush Color { set; get; }
 
-                public double ScaledSize => (32 * (1 - 0.7 * (Size - 5) / 5)) * 2;
+                public double Diameter => (32 * (1 - 0.7 * (Size - 5) / 5)) * 2;
 
                 public virtual UIElement Element => new Rectangle
                 {
-                    Width = ScaledSize,
-                    Height = ScaledSize,
+                    Width = Diameter,
+                    Height = Diameter,
                     Fill = Color,
                     Stroke = Brushes.Black,
-                    StrokeThickness = Size / 16,
+                    StrokeThickness = Size / 8,
                 };
             }   
 
@@ -242,11 +242,11 @@ namespace osu__Custom_Editor_v2
 
                 public override UIElement Element => new Ellipse
                 {
-                    Width = ScaledSize,
-                    Height = ScaledSize,
+                    Width = Diameter,
+                    Height = Diameter,
                     Fill = Color,
                     Stroke = Brushes.Black,
-                    StrokeThickness = Size / 16,
+                    StrokeThickness = Size / 8,
                 };
             }
             
@@ -274,7 +274,7 @@ namespace osu__Custom_Editor_v2
                 {
                     Width = 620,
                     Height = 620,
-                    Fill = Color,
+                    Fill = Tools.ColorHelper.HexToBrush("#A7000000"),
                     Stroke = Brushes.Black,
                     StrokeThickness = Size / 16,
                 };
