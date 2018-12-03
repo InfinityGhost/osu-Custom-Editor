@@ -43,7 +43,7 @@ namespace osu__Custom_Editor_v2
 
         #region Console
 
-        public async void Output(object sender, string text) => await Output(sender.GetType().Name + ": " + text);
+        public async void Output(object sender, string text) => await Output(sender?.GetType().Name + ": " + text);
         private async Task Output(string text) => await Console.Log(text);
 
         public async void Status(object sender, string text) => await Status(text);
@@ -115,7 +115,7 @@ namespace osu__Custom_Editor_v2
 
         async void LoadTestFile(object sender, RoutedEventArgs e)
         {
-            await Editor.Load(@"E:\osu!\Songs\785731 S3RL - Catchit (Radio Edit)\S3RL - Catchit (Radio Edit) (StarrStyx) [Insane].osu");
+            await Editor.Load(@"E:\osu!\Songs\818406 CLIFF EDGE - Endless Tears feat Nakamura Maiko\CLIFF EDGE - Endless Tears feat. Nakamura Maiko (Modem) [Suffering].osu");
         }
 
         async void GetBGImage(object sender, RoutedEventArgs e)

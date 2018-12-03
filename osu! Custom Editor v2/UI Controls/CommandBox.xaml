@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignWidth="800" d:DesignHeight="18">
     <Grid>
-        <TextBox x:Name="Box" Background="Transparent" Foreground="White" KeyDown="Box_KeyDown"/>
+        <TextBox x:Name="Box" Background="#7F000000" Foreground="White" KeyDown="Box_KeyDown" CaretBrush="White"/>
     </Grid>
 </UserControl>

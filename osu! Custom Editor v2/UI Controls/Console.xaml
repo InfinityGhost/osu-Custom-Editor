@@ -26,14 +26,16 @@
             </MenuItem>
         </Menu>
 
-        <TextBlock x:Name="ConsoleBlock" Margin="0,18,0,0" Padding="2">
-            <TextBlock.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Copy" Click="CopyButton"/>
-                    <MenuItem Header="Clear" Click="ClearButton"/>
-                </ContextMenu>
-            </TextBlock.ContextMenu>
-        </TextBlock>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,18,0,0">
+            <TextBlock x:Name="ConsoleBlock" Padding="2">
+                <TextBlock.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Click="CopyButton"/>
+                        <MenuItem Header="Clear" Click="ClearButton"/>
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
+        </ScrollViewer>
 
     </Grid>
 </UserControl>

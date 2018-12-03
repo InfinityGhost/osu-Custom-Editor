@@ -20,7 +20,10 @@ namespace osu__Custom_Editor_v2
     /// </summary>
     public partial class CommandBox : UserControl
     {
+        public event EventHandler<string> Output;
         public event EventHandler<string> CommandOutput;
+        public event EventHandler<string> Paste;
+
         public CommandBox() => InitializeComponent();
 
         void Box_KeyDown(object sender, KeyEventArgs e)
@@ -45,6 +48,30 @@ namespace osu__Custom_Editor_v2
         {
             set => Box.Background = value;
             get => Box.Background;
+        }
+
+        #endregion
+
+        #region Tools
+
+        static bool IsKeyDown(Key key)
+        {
+            switch (Keyboard.GetKeyStates(key))
+            {
+                case KeyStates.Toggled:
+                case KeyStates.Down:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        static bool AreKeysDown(IEnumerable<Key> keys)
+        {
+            foreach (var key in keys)
+                if (!IsKeyDown(key))
+                    return false;
+            return true;
         }
 
         #endregion

@@ -10,7 +10,19 @@ namespace osu__Custom_Editor_v2.Tools
     {
         public static int Timestamp(string timestamp)
         {
-            var a = timestamp.Split(':');
+            string final = string.Empty;
+            if (timestamp.Contains("-"))
+            {
+                int dash = timestamp.IndexOf('-') - 1;
+                final = timestamp.Remove(dash, timestamp.Length - dash);
+            }
+            if (final.Contains("(") || final.Contains(")"))
+            {
+                int x = final.IndexOf("(") - 1;
+                final = final.Remove(x, final.Length - x);
+            }
+
+            var a = final.Split(':');
             var times = a.ToList().ConvertAll(e => Convert.ToInt32(e));
 
             if (a.Length < 3)

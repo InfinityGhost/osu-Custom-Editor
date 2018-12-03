@@ -14,13 +14,19 @@
 
     <Grid Background="Black">
         <Menu VerticalAlignment="Top">
-            <MenuItem Header="Tools"/>
+            <MenuItem Header="Tools" IsTabStop="False"/>
         </Menu>
         <Grid Margin="0,18,0,0">
             <Image x:Name="mapbg" Stretch="Uniform" Source="/osu! Custom Editor v2;component/Assets/EditorImages/DefaultBackground.png"/>
+            <Rectangle x:Name="Overlay" Fill="#35000000" Visibility="Hidden"/>
             <local:PlaybackControl VerticalAlignment="Top" Height="40" Output="Editor_Output"/>
-            <Canvas x:Name="Field" Margin="0,40,0,18" Width="640" Height="480" SizeChanged="Field_SizeChanged"/>
-            <local:CommandBox VerticalAlignment="Bottom" Height="18" CommandOutput="Editor_Output"/>
+            <Border BorderBrush="Black" Margin="0,40,0,18"/>
+            <Viewbox Stretch="Uniform" Margin="0,40,0,18">
+                <Grid Width="640" Height="480">
+                    <Canvas x:Name="Field" Width="512" Height="384" SizeChanged="Field_SizeChanged"/>
+                </Grid>
+            </Viewbox>
+            <local:CommandBox VerticalAlignment="Bottom" Height="18" Output="Editor_Output" CommandOutput="HandleCommand"/>
         </Grid>
     </Grid>
 </UserControl>
