@@ -32,9 +32,16 @@ namespace osu__Custom_Editor_v2
 
         public Task Load(string filePath)
         {
-            Beatmap = Parser.ParseBeatmap(filePath);
-            Output?.Invoke(this, "Beatmap file \"" + filePath + "\" loaded.");
-            Path = filePath;
+            try
+            {
+                Beatmap = Parser.ParseBeatmap(filePath);
+                Output?.Invoke(this, $"Beatmap file \"{filePath}\" loaded.");
+                Path = filePath;
+            }
+            catch
+            {
+                Output?.Invoke(this, $"Failed to load beatmap at \"{filePath}\".");
+            }
             return Task.CompletedTask;
         }
 
