@@ -31,6 +31,7 @@
                 <MenuItem Header="Tests">
                     <MenuItem Header="Load test file" Click="LoadTestFile"/>
                     <MenuItem Header="Get background image" Click="GetBGImage"/>
+                    <MenuItem Header="Render start objects" Click="RenderStartObjects"/>
                 </MenuItem>
             </MenuItem>
             

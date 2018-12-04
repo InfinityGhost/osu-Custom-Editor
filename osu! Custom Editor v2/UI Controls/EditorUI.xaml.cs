@@ -114,7 +114,8 @@ namespace osu__Custom_Editor_v2
                     {
                         try
                         {
-                            await LoadElement(Decoder.Timestamp(remainder));
+                            //await LoadElement(Decoder.Timestamp(remainder));
+                            await LoadElements(Decoder.Timestamp(remainder));
                         }
                         catch (NullReferenceException)
                         {
@@ -162,20 +163,7 @@ namespace osu__Custom_Editor_v2
 
             if (obj != null)
             {
-                Visual.Object shape;
-                switch(obj.GetType().Name)
-                {
-                    case "StandardHitCircle":
-                        {
-                            shape = new Visual.Circle(obj as StandardHitCircle, cs);
-                            break;
-                        }
-                    default:
-                        {
-                            shape = new Visual.Object();
-                            break;
-                        }
-                }
+                var shape = GetVisualObject(obj, cs);
 
                 var element = shape.Element;
                 Field.Children.Add(element);
@@ -188,11 +176,54 @@ namespace osu__Custom_Editor_v2
             return Task.CompletedTask;
         }
 
+        public Task LoadElements(int time, int ar = 9)
+        {
+            Field.Children.Clear();
+            var objs = Editor.Beatmap.HitObjects.Where(e => e.StartTime <= time + 1200 && e.StartTime >= time - 1200) ?? null;
+            var cs = Editor.Beatmap?.DifficultySection.CircleSize ?? 0;
+
+            if (objs != null)
+            {
+                foreach(var obj in objs)
+                {
+                    var visual = GetVisualObject(obj, cs);
+                    PlaceElement(visual);
+                    Output?.Invoke(visual, $"Object @ {obj.StartTime}ms rendered");
+                }
+            }
+
+
+            return Task.CompletedTask;
+        }
+
+        public Task PlaceElement(Visual.Object visual)
+        {
+            var element = visual.Element;
+            Field.Children.Add(element);
+            MoveElement(element, visual.CenterPos);
+            return Task.CompletedTask;
+        }
+
         public Task MoveElement(UIElement element, Point position)
         {
             Canvas.SetLeft(element, position.X);
             Canvas.SetTop(element, position.Y);
             return Task.CompletedTask;
+        }
+
+        public Visual.Object GetVisualObject(OsuBeatmapParser.Beatmaps.Objects.HitObject hitObject, float cs = 4)
+        {
+            switch (hitObject.GetType().Name)
+            {
+                case "StandardHitCircle":
+                    {
+                        return new Visual.Circle(hitObject as StandardHitCircle, cs);
+                    }
+                default:
+                    {
+                        return new Visual.Object();
+                    }
+            }
         }
 
         public class Visual
