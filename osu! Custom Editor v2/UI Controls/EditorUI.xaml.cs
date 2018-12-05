@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using Point = System.Drawing.Point;
 using Decoder = osu__Custom_Editor_v2.Tools.Decoder;
 
-using OsuBeatmapParser.Beatmaps.Objects.Standard;
+using OsuParsers.Beatmaps.Objects.Standard;
 
 namespace osu__Custom_Editor_v2
 {
@@ -211,7 +211,7 @@ namespace osu__Custom_Editor_v2
             return Task.CompletedTask;
         }
 
-        public Visual.Object GetVisualObject(OsuBeatmapParser.Beatmaps.Objects.HitObject hitObject, float cs = 4)
+        public Visual.Object GetVisualObject(OsuParsers.Beatmaps.Objects.HitObject hitObject, float cs = 4)
         {
             switch (hitObject.GetType().Name)
             {

@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using OsuBeatmapParser;
-using OsuBeatmapParser.Beatmaps;
+using OsuParsers;
+using OsuParsers.Beatmaps;
 
 namespace osu__Custom_Editor_v2
 {
