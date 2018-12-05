@@ -124,6 +124,11 @@ namespace osu__Custom_Editor_v2
             await Output(Editor.BackgroundImage);
         }
 
+        async void RenderStartObjects(object sender, RoutedEventArgs e)
+        {
+            await Editor.LoadElements(0);
+        }
+
         #endregion
 
     }

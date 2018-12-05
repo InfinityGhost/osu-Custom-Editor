@@ -23,7 +23,7 @@
             <Border BorderBrush="Black" Margin="0,40,0,18"/>
             <Viewbox Stretch="Uniform" Margin="0,40,0,18">
                 <Grid Width="640" Height="480">
-                    <Canvas x:Name="Field" Width="512" Height="384" SizeChanged="Field_SizeChanged"/>
+                    <Canvas x:Name="Field" Width="512" Height="384"/>
                 </Grid>
             </Viewbox>
             <local:CommandBox VerticalAlignment="Bottom" Height="18" Output="Editor_Output" CommandOutput="HandleCommand"/>

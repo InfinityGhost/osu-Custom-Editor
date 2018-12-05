@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using Point = System.Drawing.Point;
 using Decoder = osu__Custom_Editor_v2.Tools.Decoder;
 
-using OsuBeatmapParser.Beatmaps.Objects.Standard;
+using OsuParsers.Beatmaps.Objects.Standard;
 
 namespace osu__Custom_Editor_v2
 {
@@ -114,7 +114,8 @@ namespace osu__Custom_Editor_v2
                     {
                         try
                         {
-                            await LoadElement(Decoder.Timestamp(remainder));
+                            //await LoadElement(Decoder.Timestamp(remainder));
+                            await LoadElements(Decoder.Timestamp(remainder));
                         }
                         catch (NullReferenceException)
                         {
@@ -162,35 +163,44 @@ namespace osu__Custom_Editor_v2
 
             if (obj != null)
             {
-                Visual.Object shape;
-                switch(obj.GetType().Name)
-                {
-                    case "StandardHitCircle":
-                        {
-                            shape = new Visual.Circle(obj as StandardHitCircle, cs);
-                            break;
-                        }
-                    default:
-                        {
-                            shape = new Visual.Object();
-                            break;
-                        }
-                }
+                var shape = GetVisualObject(obj, cs);
 
                 var element = shape.Element;
                 Field.Children.Add(element);
 
-                var position = new Point
-                {
-                    X = Convert.ToInt32(shape.Position.X - shape.ScaledSize /2.0),
-                    Y = Convert.ToInt32(shape.Position.Y - shape.ScaledSize /2.0)
-                };
-
-                MoveElement(element, position);
+                MoveElement(element, shape.CenterPos);
                 Output?.Invoke(element, $"Object rendered.");
             }
             else
                 throw new Exception("Object not found");
+            return Task.CompletedTask;
+        }
+
+        public Task LoadElements(int time, int ar = 9)
+        {
+            Field.Children.Clear();
+            var objs = Editor.Beatmap.HitObjects.Where(e => e.StartTime <= time + 1200 && e.StartTime >= time - 1200) ?? null;
+            var cs = Editor.Beatmap?.DifficultySection.CircleSize ?? 0;
+
+            if (objs != null)
+            {
+                foreach(var obj in objs)
+                {
+                    var visual = GetVisualObject(obj, cs);
+                    PlaceElement(visual);
+                    Output?.Invoke(visual, $"Object @ {obj.StartTime}ms rendered");
+                }
+            }
+
+
+            return Task.CompletedTask;
+        }
+
+        public Task PlaceElement(Visual.Object visual)
+        {
+            var element = visual.Element;
+            Field.Children.Add(element);
+            MoveElement(element, visual.CenterPos);
             return Task.CompletedTask;
         }
 
@@ -199,6 +209,21 @@ namespace osu__Custom_Editor_v2
             Canvas.SetLeft(element, position.X);
             Canvas.SetTop(element, position.Y);
             return Task.CompletedTask;
+        }
+
+        public Visual.Object GetVisualObject(OsuParsers.Beatmaps.Objects.HitObject hitObject, float cs = 4)
+        {
+            switch (hitObject.GetType().Name)
+            {
+                case "StandardHitCircle":
+                    {
+                        return new Visual.Circle(hitObject as StandardHitCircle, cs);
+                    }
+                default:
+                    {
+                        return new Visual.Object();
+                    }
+            }
         }
 
         public class Visual
@@ -215,15 +240,21 @@ namespace osu__Custom_Editor_v2
                 public double Size { set; get; }
                 public Brush Color { set; get; }
 
-                public double ScaledSize => (32 * (1 - 0.7 * (Size - 5) / 5)) * 2;
+                public double Diameter => (32 * (1 - 0.7 * (Size - 5) / 5)) * 2;
+
+                public Point CenterPos => new Point
+                {
+                    X = Convert.ToInt32(Position.X - Size / 2),
+                    Y = Convert.ToInt32(Position.Y - Size / 2),
+                };
 
                 public virtual UIElement Element => new Rectangle
                 {
-                    Width = ScaledSize,
-                    Height = ScaledSize,
+                    Width = Diameter,
+                    Height = Diameter,
                     Fill = Color,
                     Stroke = Brushes.Black,
-                    StrokeThickness = Size / 16,
+                    StrokeThickness = Size / 8,
                 };
             }   
 
@@ -242,11 +273,11 @@ namespace osu__Custom_Editor_v2
 
                 public override UIElement Element => new Ellipse
                 {
-                    Width = ScaledSize,
-                    Height = ScaledSize,
+                    Width = Diameter,
+                    Height = Diameter,
                     Fill = Color,
                     Stroke = Brushes.Black,
-                    StrokeThickness = Size / 16,
+                    StrokeThickness = Size / 8,
                 };
             }
             
@@ -274,17 +305,11 @@ namespace osu__Custom_Editor_v2
                 {
                     Width = 620,
                     Height = 620,
-                    Fill = Color,
+                    Fill = Tools.ColorHelper.HexToBrush("#A7000000"),
                     Stroke = Brushes.Black,
                     StrokeThickness = Size / 16,
                 };
             }
-        }
-
-        private void Field_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            // TODO: add field scaling
-            Canvas canvas = sender as Canvas;
         }
 
         #endregion
