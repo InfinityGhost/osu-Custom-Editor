@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Tools\Decoder.cs" />
+    <Compile Include="Tools\Images.cs" />
     <Compile Include="Tools\OsuCalc.cs" />
     <Compile Include="UI Controls\CommandBox.xaml.cs">
       <DependentUpon>CommandBox.xaml</DependentUpon>

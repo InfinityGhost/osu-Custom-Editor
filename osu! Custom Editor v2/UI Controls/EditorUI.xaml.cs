@@ -65,12 +65,12 @@ namespace osu__Custom_Editor_v2
         {
             set
             {
-                mapbg.Source = new ImageSourceConverter().ConvertFromString(value) as ImageSource;
+                mapbg.Source = Tools.Images.GetSource(value);
                 Output?.Invoke(this, "Background image updated to " + value);
             }
             get
             {
-                return ((BitmapFrame)mapbg.Source).Decoder.ToString();
+                return Tools.Images.GetPath(mapbg);
             }
         }
 
