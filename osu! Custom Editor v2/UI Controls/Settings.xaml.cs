@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using OsuBeatmapParser;
-using OsuBeatmapParser.Beatmaps;
-using OsuBeatmapParser.Beatmaps.Sections;
+using OsuParsers;
+using OsuParsers.Beatmaps;
+using OsuParsers.Beatmaps.Sections;
 
 namespace osu__Custom_Editor_v2
 {
