@@ -179,9 +179,10 @@ namespace osu__Custom_Editor_v2
         public Task LoadElements(int time, int ar = 9)
         {
             Field.Children.Clear();
-            var objs = Editor.Beatmap.HitObjects.Where(e => e.StartTime <= time + 1200 && e.StartTime >= time - 1200) ?? null;
+            var preempt = Tools.OsuCalc.Preempt(ar) * 2;
+            var objs = Editor.Beatmap?.HitObjects.Where(e => e.StartTime <= time + preempt && e.StartTime >= time - preempt) ?? null;
             var cs = Editor.Beatmap?.DifficultySection.CircleSize ?? 0;
-
+            
             if (objs != null)
             {
                 foreach(var obj in objs)
@@ -191,8 +192,6 @@ namespace osu__Custom_Editor_v2
                     Output?.Invoke(visual, $"Object @ {obj.StartTime}ms rendered");
                 }
             }
-
-
             return Task.CompletedTask;
         }
 
@@ -216,13 +215,13 @@ namespace osu__Custom_Editor_v2
             switch (hitObject.GetType().Name)
             {
                 case "StandardHitCircle":
-                    {
-                        return new Visual.Circle(hitObject as StandardHitCircle, cs);
-                    }
+                    return new Visual.Circle(hitObject as StandardHitCircle, cs);
+                case "StandardSlider":
+                    return new Visual.Slider(hitObject as StandardSlider, cs);
+                case "StandardSpinner":
+                    return new Visual.Spinner(hitObject as StandardSpinner);
                 default:
-                    {
-                        return new Visual.Object();
-                    }
+                    return new Visual.Object();
             }
         }
 
@@ -301,13 +300,16 @@ namespace osu__Custom_Editor_v2
                     
                 }
 
+                public new Point Position => new Point(256, 192);
+                public new double Size => throw new Exception("Value not available for this object type.");
+
                 public override UIElement Element => new Ellipse
                 {
-                    Width = 620,
-                    Height = 620,
+                    Width = 384,
+                    Height = 384,
                     Fill = Tools.ColorHelper.HexToBrush("#A7000000"),
                     Stroke = Brushes.Black,
-                    StrokeThickness = Size / 16,
+                    StrokeThickness = 16,
                 };
             }
         }
