@@ -69,7 +69,7 @@ namespace osu__Custom_Editor_v2
                             var general = Beatmap.GeneralSection;
                             general.Countdown = Countdown.IsChecked ?? false;
                             general.WidescreenStoryboard = Widescreen.IsChecked ?? false;
-                            // StoryFireInFront N/A
+                            general.StoryFireInFront = StoryFront.IsChecked ?? false;
                             general.EpilepsyWarning = Epilepsy.IsChecked ?? false;
                             general.LetterboxInBreaks = LetterboxBreaks.IsChecked ?? false;    
                             break;
