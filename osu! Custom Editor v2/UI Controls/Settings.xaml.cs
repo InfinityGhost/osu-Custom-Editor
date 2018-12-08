@@ -34,7 +34,7 @@ namespace osu__Custom_Editor_v2
 
         public Beatmap Beatmap { private get; set; }
 
-        private void UpdateProperties(object sender, EventArgs e = null)
+        private async void UpdateProperties(object sender, EventArgs e = null)
         {
             Output?.Invoke(sender, "Updated properties.");
             if (Beatmap != null)
@@ -43,40 +43,30 @@ namespace osu__Custom_Editor_v2
                 {
                     case "TextBox":
                         {
-                            var metadata = Beatmap.MetadataSection;
-                            metadata.TitleUnicode = SongTitleUnicode.Text;
-                            metadata.Title = SongTitle.Text;
-                            metadata.ArtistUnicode = SongArtistUnicode.Text;
-                            metadata.Artist = SongArtist.Text;
-                            metadata.Version = Difficulty.Text;
-                            metadata.Source = Source.Text;
-                            metadata.TagsString = Tags.Text;
+                            await UpdateTextbox();
                             break;
                         }
                     case "Slider":
                         {
-                            var difficulty = Beatmap.DifficultySection;
-                            difficulty.HPDrainRate = ConvertFloat(HPDrainRate.Value);
-                            difficulty.CircleSize = ConvertFloat(CircleSize.Value);
-                            difficulty.ApproachRate = ConvertFloat(ApproachRate.Value);
-                            difficulty.OverallDifficulty = ConvertFloat(OverallDifficulty);
-
-                            Beatmap.GeneralSection.StackLeniency = ConvertFloat(StackLeniency.Value);
+                            await UpdateSliders();
                             break;
                         }
                     case "CheckBox":
                         {
-                            var general = Beatmap.GeneralSection;
-                            general.Countdown = Countdown.IsChecked ?? false;
-                            general.WidescreenStoryboard = Widescreen.IsChecked ?? false;
-                            general.StoryFireInFront = StoryFront.IsChecked ?? false;
-                            general.EpilepsyWarning = Epilepsy.IsChecked ?? false;
-                            general.LetterboxInBreaks = LetterboxBreaks.IsChecked ?? false;    
+                            await UpdateTextbox();
                             break;
                         }
                     case "ComboBox":
                         {
-                            Beatmap.GeneralSection.ModeId = Mode.SelectedIndex;
+                            await UpdateCombobox();
+                            break;
+                        }
+                    case "Beatmap":
+                        {
+                            await UpdateTextbox();
+                            await UpdateSliders();
+                            await UpdateTextbox();
+                            await UpdateCombobox();
                             break;
                         }
                     default:
@@ -90,6 +80,49 @@ namespace osu__Custom_Editor_v2
             else
                 Output?.Invoke(sender, "Invalid beatmap file.");
         }
+
+        public Task UpdateTextbox()
+        {
+            var metadata = Beatmap.MetadataSection;
+            metadata.TitleUnicode = SongTitleUnicode.Text;
+            metadata.Title = SongTitle.Text;
+            metadata.ArtistUnicode = SongArtistUnicode.Text;
+            metadata.Artist = SongArtist.Text;
+            metadata.Version = Difficulty.Text;
+            metadata.Source = Source.Text;
+            metadata.TagsString = Tags.Text;
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateSliders()
+        {
+            var difficulty = Beatmap.DifficultySection;
+            difficulty.HPDrainRate = ConvertFloat(HPDrainRate.Value);
+            difficulty.CircleSize = ConvertFloat(CircleSize.Value);
+            difficulty.ApproachRate = ConvertFloat(ApproachRate.Value);
+            difficulty.OverallDifficulty = ConvertFloat(OverallDifficulty);
+
+            Beatmap.GeneralSection.StackLeniency = ConvertFloat(StackLeniency.Value);
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateCheckbox()
+        {
+            var general = Beatmap.GeneralSection;
+            general.Countdown = Countdown.IsChecked ?? false;
+            general.WidescreenStoryboard = Widescreen.IsChecked ?? false;
+            general.StoryFireInFront = StoryFront.IsChecked ?? false;
+            general.EpilepsyWarning = Epilepsy.IsChecked ?? false;
+            general.LetterboxInBreaks = LetterboxBreaks.IsChecked ?? false;
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateCombobox()
+        {
+            Beatmap.GeneralSection.ModeId = Mode.SelectedIndex;
+            return Task.CompletedTask;
+        }
+
 
         public static float ConvertFloat(object value)
         {
