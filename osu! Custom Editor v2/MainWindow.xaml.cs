@@ -119,15 +119,15 @@ namespace osu__Custom_Editor_v2
             await LoadFile(@"E:\osu!\Songs\818406 CLIFF EDGE - Endless Tears feat Nakamura Maiko\CLIFF EDGE - Endless Tears feat. Nakamura Maiko (Modem) [Suffering].osu");
         }
 
-        async void GetBGImage(object sender, RoutedEventArgs e)
+        async void GetBGImage(object sender, EventArgs e = null)
         {
             await Editor.LoadBackground();
             await Output(Editor.BackgroundImage);
         }
 
-        async void RenderStartObjects(object sender, RoutedEventArgs e)
+        async void RenderStartObjects(object sender, EventArgs e = null)
         {
-            await Editor.LoadElements(0);
+            await Editor.LoadElements(Editor.Beatmap.HitObjects.First().StartTime);
         }
 
         #endregion
