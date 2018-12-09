@@ -47,8 +47,15 @@ namespace osu__Custom_Editor_v2
 
         public Task Save(string filePath)
         {
-            // TODO: add save function
-            throw new NotImplementedException();
+            try
+            {
+                Beatmap.Write(filePath);
+            }
+            catch(Exception ex)
+            {
+                Output?.Invoke(this, ex.Message);
+            }
+            return Task.CompletedTask;
         }
 
         #endregion
