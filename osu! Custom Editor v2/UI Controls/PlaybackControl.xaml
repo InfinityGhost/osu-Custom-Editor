@@ -35,7 +35,7 @@
                 <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/stop.png"/>
             </Button>
 
-            <TextBox x:Name="TimeBox" Background="Transparent" Foreground="White" Width="75" BorderBrush="White" Text="{Binding Mode=OneWay}"/>
+            <TextBox x:Name="TimeBox" Background="Transparent" Foreground="White" Width="100" BorderBrush="White" Text="{Binding Mode=OneWay}"/>
 
         </StackPanel>
     </Grid>
