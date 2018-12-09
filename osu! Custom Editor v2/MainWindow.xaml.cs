@@ -101,7 +101,7 @@ namespace osu__Custom_Editor_v2
         }
         public async Task SaveFile(string filename)
         {
-            
+            await Editor.Save(filename);
         }
 
         #endregion
