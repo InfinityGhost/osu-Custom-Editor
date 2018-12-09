@@ -29,9 +29,6 @@ namespace osu__Custom_Editor_v2
             InitializeComponent();
         }
 
-        public event EventHandler<string> Output;
-        public event EventHandler<Beatmap> BeatmapUpdate;
-
         public Beatmap Beatmap
         {
             get => _beatmap;
