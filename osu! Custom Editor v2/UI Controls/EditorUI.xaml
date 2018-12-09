@@ -19,7 +19,8 @@
         <Grid Margin="0,18,0,0">
             <Image x:Name="mapbg" Stretch="Uniform" Source="/osu! Custom Editor v2;component/Assets/EditorImages/DefaultBackground.png"/>
             <Rectangle x:Name="Overlay" Fill="#35000000" Visibility="Hidden"/>
-            <local:PlaybackControl VerticalAlignment="Top" Height="40" Output="Editor_Output"/>
+            <local:PlaybackControl x:Name="Controls" VerticalAlignment="Top" Height="40" Output="Editor_Output"
+                                   Play="Controls_Play" Pause="Controls_Pause" Stop="Controls_Stop"/>
             <Border BorderBrush="Black" Margin="0,40,0,18"/>
             <Viewbox Stretch="Uniform" Margin="0,40,0,18">
                 <Grid Width="640" Height="480">

@@ -14,8 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Point = System.Drawing.Point;
 using Decoder = osu__Custom_Editor_v2.Tools.Decoder;
+using WMPLib;
 
 using OsuParsers.Beatmaps.Objects.Standard;
+using System.Media;
 
 namespace osu__Custom_Editor_v2
 {
@@ -40,6 +42,8 @@ namespace osu__Custom_Editor_v2
         {
             await Editor.Load(filename);
             await LoadBackground();
+            AudioOutput.Open(Editor.AudioPath);
+            Controls.TimeBox.DataContext = AudioOutput.Position;
             Overlay.SetValue(VisibilityProperty, Visibility.Visible);
         }
 
@@ -80,6 +84,8 @@ namespace osu__Custom_Editor_v2
             set => Editor.Beatmap = value;
         }
 
+        public MediaPlayer AudioOutput { private set; get; } = new MediaPlayer();
+
         #endregion
 
         #region Methods
@@ -104,7 +110,11 @@ namespace osu__Custom_Editor_v2
 
         #region Playback Control
 
-        // TBA
+        private void Controls_Play(object sender, RoutedEventArgs e) => AudioOutput.Play();
+
+        private void Controls_Pause(object sender, RoutedEventArgs e) => AudioOutput.Pause();
+
+        private void Controls_Stop(object sender, RoutedEventArgs e) => AudioOutput.Stop();
 
         #endregion
 
@@ -320,8 +330,8 @@ namespace osu__Custom_Editor_v2
             }
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

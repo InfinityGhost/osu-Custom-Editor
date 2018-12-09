@@ -20,16 +20,17 @@ namespace osu__Custom_Editor_v2
     /// </summary>
     public partial class PlaybackControl : UserControl
     {
-        public PlaybackControl() => InitializeComponent();
+        public PlaybackControl()
+        {
+            InitializeComponent();
+            TimeBox.DataContext = this;
+        }
 
         public event EventHandler<string> Output;
 
         public event RoutedEventHandler Pause;
         public event RoutedEventHandler Play;
         public event RoutedEventHandler Stop;
-        public event EventHandler<bool> PlayingChanged;
-
-        public event EventHandler<int> TimeChanged;
 
         public bool IsPlaying { get; private set; }
 
@@ -53,6 +54,5 @@ namespace osu__Custom_Editor_v2
             Stop?.Invoke(sender, e);
             IsPlaying = false;
         }
-
     }
 }

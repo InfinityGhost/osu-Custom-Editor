@@ -25,6 +25,7 @@ namespace osu__Custom_Editor_v2
         public string FolderPath => System.IO.Path.GetDirectoryName(Path);
         public string Path { get; private set; }
         public Beatmap Beatmap { get; set; }
+        public Uri AudioPath => new Uri($@"{FolderPath}\{Beatmap.GeneralSection.AudioFilename}");
 
         #endregion
 

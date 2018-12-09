@@ -19,6 +19,10 @@
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Margin" Value="-2"/>
                 </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="20,-2,0,-2"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
             </StackPanel.Resources>
 
             <Button  VerticalAlignment="Center" x:Name="PauseButton" Click="PauseButtonClick">
@@ -30,6 +34,8 @@
             <Button VerticalAlignment="Center" x:Name="StopButton" Click="StopButtonClick">
                 <Image Source="/osu! Custom Editor v2;component/Assets/PlaybackControl/stop.png"/>
             </Button>
+
+            <TextBox x:Name="TimeBox" Background="Transparent" Foreground="White" Width="100" BorderBrush="White" Text="{Binding Milliseconds, Mode=OneWay}"/>
 
         </StackPanel>
     </Grid>
