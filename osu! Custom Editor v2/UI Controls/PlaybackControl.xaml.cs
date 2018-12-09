@@ -23,7 +23,6 @@ namespace osu__Custom_Editor_v2
         public PlaybackControl()
         {
             InitializeComponent();
-            TimeBox.DataContext = this;
         }
 
         public event EventHandler<string> Output;
