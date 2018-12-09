@@ -114,7 +114,7 @@ namespace osu__Custom_Editor_v2
 
         #region Tests
 
-        async void LoadTestFile(object sender, RoutedEventArgs e)
+        async void LoadTestFile(object sender, EventArgs e = null)
         {
             await LoadFile(@"E:\osu!\Songs\818406 CLIFF EDGE - Endless Tears feat Nakamura Maiko\CLIFF EDGE - Endless Tears feat. Nakamura Maiko (Modem) [Suffering].osu");
         }

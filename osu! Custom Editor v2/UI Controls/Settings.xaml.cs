@@ -42,5 +42,16 @@ namespace osu__Custom_Editor_v2
             }
         }
         private Beatmap _beatmap;
+
+        private void UpdateCSAppearance(object sender = null, EventArgs e = null)
+        {
+            if (sender is ComboBox x)
+            {
+                if (x.SelectedIndex == 3)
+                    CSGroup.Header = "Columns";
+                else
+                    CSGroup.Header = "Circle Size";
+            }
+        }
     }
 }

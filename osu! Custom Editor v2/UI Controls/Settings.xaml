@@ -38,6 +38,9 @@
             <Style TargetType="Slider">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="AutoToolTipPlacement" Value="BottomRight"/>
+                <Setter Property="TickFrequency" Value="0.1"/>
+                <Setter Property="IsSnapToTickEnabled" Value="True"/>
+                <Setter Property="SmallChange" Value="1"/>
             </Style>
             <Style TargetType="CheckBox">
                 <Setter Property="Margin" Value="2.5"/>
@@ -89,7 +92,7 @@
                             <GroupBox Header="HP Drain Rate">
                                 <Slider Value="{Binding HPDrainRate, Mode=TwoWay}"/>
                             </GroupBox>
-                            <GroupBox Header="Circle Size">
+                            <GroupBox Header="Circle Size" x:Name="CSGroup">
                                 <Slider Value="{Binding CircleSize, Mode=TwoWay}"/>
                             </GroupBox>
                             <GroupBox Header="Approach Rate">
@@ -114,7 +117,7 @@
                             </GroupBox>
 
                             <GroupBox Header="Mode">
-                                <ComboBox SelectedIndex="{Binding ModeId}">
+                                <ComboBox SelectedIndex="{Binding ModeId}" SelectionChanged="UpdateCSAppearance">
                                     <ComboBoxItem Content="osu!"/>
                                     <ComboBoxItem Content="osu!taiko"/>
                                     <ComboBoxItem Content="osu!catch"/>
