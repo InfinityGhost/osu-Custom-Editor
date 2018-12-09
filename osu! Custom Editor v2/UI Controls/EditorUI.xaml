@@ -7,12 +7,22 @@
              mc:Ignorable="d" 
              d:DesignWidth="960" d:DesignHeight="540">
     <UserControl.Resources>
+        <RoutedCommand x:Key="PlayPause"/>
+        
         <Style TargetType="{x:Type Menu}">
             <Setter Property="Background" Value="White"/>
         </Style>
     </UserControl.Resources>
+    
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{StaticResource PlayPause}" Executed="PlayPause"/>
+    </UserControl.CommandBindings>
 
-    <Grid Background="Black">
+    <UserControl.InputBindings>
+        <MouseBinding Command="{StaticResource PlayPause}" MouseAction="MiddleClick"/>
+    </UserControl.InputBindings>
+
+            <Grid Background="Black">
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Tools" IsTabStop="False"/>
         </Menu>

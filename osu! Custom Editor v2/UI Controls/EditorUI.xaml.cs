@@ -14,8 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Point = System.Drawing.Point;
 using Decoder = osu__Custom_Editor_v2.Tools.Decoder;
-using WMPLib;
-
 using OsuParsers.Beatmaps.Objects.Standard;
 using System.Media;
 
@@ -84,7 +82,7 @@ namespace osu__Custom_Editor_v2
             set => Editor.Beatmap = value;
         }
 
-        public MediaPlayer AudioOutput { private set; get; } = new MediaPlayer();
+        public AudioPlayer AudioOutput { private set; get; } = new AudioPlayer();
 
         #endregion
 
@@ -110,11 +108,38 @@ namespace osu__Custom_Editor_v2
 
         #region Playback Control
 
-        private void Controls_Play(object sender, RoutedEventArgs e) => AudioOutput.Play();
+        private async void Controls_Play(object sender, RoutedEventArgs e)
+        {
+            await AudioOutput.Play();
+            await UpdateTime();
+        }
 
-        private void Controls_Pause(object sender, RoutedEventArgs e) => AudioOutput.Pause();
+        private async void Controls_Pause(object sender, RoutedEventArgs e)
+        {
+            await AudioOutput.Pause();
+            await UpdateTime();
+        }
 
-        private void Controls_Stop(object sender, RoutedEventArgs e) => AudioOutput.Stop();
+        private async void Controls_Stop(object sender, RoutedEventArgs e)
+        {
+            await AudioOutput.Stop();
+            await UpdateTime();
+        }
+
+        private async void PlayPause(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (AudioOutput.IsPlaying)
+                await AudioOutput.Pause();
+            else
+                await AudioOutput.Play();
+            await UpdateTime();
+        }
+
+        public Task UpdateTime()
+        {
+            Controls.TimeBox.DataContext = AudioOutput.Position;
+            return Task.CompletedTask;
+        }
 
         #endregion
 
@@ -332,6 +357,5 @@ namespace osu__Custom_Editor_v2
 
 
         #endregion
-
     }
 }
