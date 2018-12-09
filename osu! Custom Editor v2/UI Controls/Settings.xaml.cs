@@ -32,103 +32,20 @@ namespace osu__Custom_Editor_v2
         public event EventHandler<string> Output;
         public event EventHandler<Beatmap> BeatmapUpdate;
 
-        public Beatmap Beatmap { private get; set; }
-
-        private async void UpdateProperties(object sender, EventArgs e = null)
+        public Beatmap Beatmap
         {
-            Output?.Invoke(sender, "Updated properties.");
-            if (Beatmap != null)
+            get => _beatmap;
+            set
             {
-                switch (sender.GetType().Name)
-                {
-                    case "TextBox":
-                        {
-                            await UpdateTextbox();
-                            break;
-                        }
-                    case "Slider":
-                        {
-                            await UpdateSliders();
-                            break;
-                        }
-                    case "CheckBox":
-                        {
-                            await UpdateTextbox();
-                            break;
-                        }
-                    case "ComboBox":
-                        {
-                            await UpdateCombobox();
-                            break;
-                        }
-                    case "Beatmap":
-                        {
-                            await UpdateTextbox();
-                            await UpdateSliders();
-                            await UpdateTextbox();
-                            await UpdateCombobox();
-                            break;
-                        }
-                    default:
-                        {
-                            Output?.Invoke(sender, "Unknown object update.");
-                            break;
-                        }
-                }
-                BeatmapUpdate?.Invoke(this, Beatmap);
+                _beatmap = value;
+                Metadata.DataContext = _beatmap.MetadataSection;
+                Difficulty.DataContext = _beatmap.DifficultySection;
+                Advanced.DataContext = _beatmap.GeneralSection;
+                Design.DataContext = _beatmap.GeneralSection;
             }
-            else
-                Output?.Invoke(sender, "Invalid beatmap file.");
         }
-
-        public Task UpdateTextbox()
-        {
-            var metadata = Beatmap.MetadataSection;
-            metadata.TitleUnicode = SongTitleUnicode.Text;
-            metadata.Title = SongTitle.Text;
-            metadata.ArtistUnicode = SongArtistUnicode.Text;
-            metadata.Artist = SongArtist.Text;
-            metadata.Version = Difficulty.Text;
-            metadata.Source = Source.Text;
-            metadata.TagsString = Tags.Text;
-            return Task.CompletedTask;
-        }
-
-        public Task UpdateSliders()
-        {
-            var difficulty = Beatmap.DifficultySection;
-            difficulty.HPDrainRate = ConvertFloat(HPDrainRate.Value);
-            difficulty.CircleSize = ConvertFloat(CircleSize.Value);
-            difficulty.ApproachRate = ConvertFloat(ApproachRate.Value);
-            difficulty.OverallDifficulty = ConvertFloat(OverallDifficulty);
-
-            Beatmap.GeneralSection.StackLeniency = ConvertFloat(StackLeniency.Value);
-            return Task.CompletedTask;
-        }
-
-        public Task UpdateCheckbox()
-        {
-            var general = Beatmap.GeneralSection;
-            general.Countdown = Countdown.IsChecked ?? false;
-            general.WidescreenStoryboard = Widescreen.IsChecked ?? false;
-            general.StoryFireInFront = StoryFront.IsChecked ?? false;
-            general.EpilepsyWarning = Epilepsy.IsChecked ?? false;
-            general.LetterboxInBreaks = LetterboxBreaks.IsChecked ?? false;
-            return Task.CompletedTask;
-        }
-
-        public Task UpdateCombobox()
-        {
-            Beatmap.GeneralSection.ModeId = Mode.SelectedIndex;
-            return Task.CompletedTask;
-        }
+        private Beatmap _beatmap;
 
 
-        public static float ConvertFloat(object value)
-        {
-            float y;
-            float.TryParse(value.ToString(), out y);
-            return y;
-        }
     }
 }

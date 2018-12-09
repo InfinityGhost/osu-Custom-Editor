@@ -34,50 +34,46 @@
             <Style TargetType="TextBox">
                 <Setter Property="Height" Value="24"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <EventSetter Event="TextChanged" Handler="UpdateProperties"/>
             </Style>
             <Style TargetType="Slider">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="AutoToolTipPlacement" Value="BottomRight"/>
-                <EventSetter Event="ValueChanged" Handler="UpdateProperties"/>
             </Style>
             <Style TargetType="CheckBox">
                 <Setter Property="Margin" Value="2.5"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <EventSetter Event="Checked" Handler="UpdateProperties"/>
             </Style>
             <Style TargetType="ComboBox">
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <EventSetter Event="SelectionChanged" Handler="UpdateProperties"/>
             </Style>
         </Grid.Resources>
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Border Width="250" DockPanel.Dock="Left">
                 <ScrollViewer>
-                    <StackPanel>
+                    <StackPanel x:Name="Metadata">
                         <Label Content="Metadata"/>
 
                         <GroupBox Header="Title">
-                            <TextBox x:Name="SongTitleUnicode"/>
+                            <TextBox Text="{Binding TitleUnicode, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Romanized Title">
-                            <TextBox x:Name="SongTitle"/>
+                            <TextBox Text="{Binding Title, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Artist">
-                            <TextBox x:Name="SongArtistUnicode"/>
+                            <TextBox Text="{Binding ArtistUnicode, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Romanized Artist">
-                            <TextBox x:Name="SongArtist"/>
+                            <TextBox Text="{Binding Artist, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Difficulty">
-                            <TextBox x:Name="Difficulty"/>
+                            <TextBox Text="{Binding Version, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Source">
-                            <TextBox x:Name="Source"/>
+                            <TextBox Text="{Binding Source, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Tags">
-                            <TextBox x:Name="Tags"/>
+                            <TextBox Text="{Binding TagsString, Mode=TwoWay}"/>
                         </GroupBox>
 
                     </StackPanel>
@@ -87,20 +83,20 @@
             <StackPanel Width="250">
                 <Border DockPanel.Dock="Top">
                     <ScrollViewer>
-                        <StackPanel>
+                        <StackPanel x:Name="Difficulty">
                             <Label Content="Difficulty"/>
 
                             <GroupBox Header="HP Drain Rate">
-                                <Slider x:Name="HPDrainRate"/>
+                                <Slider/>
                             </GroupBox>
                             <GroupBox Header="Circle Size">
-                                <Slider x:Name="CircleSize"/>
+                                <Slider/>
                             </GroupBox>
                             <GroupBox Header="Approach Rate">
-                                <Slider x:Name="ApproachRate"/>
+                                <Slider/>
                             </GroupBox>
                             <GroupBox Header="Overall Difficulty">
-                                <Slider x:Name="OverallDifficulty"/>
+                                <Slider/>
                             </GroupBox>
 
 
@@ -110,15 +106,15 @@
 
                 <Border DockPanel.Dock="Top">
                     <ScrollViewer>
-                        <StackPanel>
+                        <StackPanel x:Name="Advanced">
                             <Label Content="Advanced"/>
 
                             <GroupBox Header="Stack Leniency">
-                                <Slider x:Name="StackLeniency"/>
+                                <Slider/>
                             </GroupBox>
 
                             <GroupBox Header="Mode">
-                                <ComboBox x:Name="Mode" SelectedIndex="0">
+                                <ComboBox SelectedIndex="0">
                                     <ComboBoxItem Content="osu!"/>
                                     <ComboBoxItem Content="osu!taiko"/>
                                     <ComboBoxItem Content="osu!catch"/>
@@ -133,19 +129,19 @@
             
             <Border Width="250" DockPanel.Dock="Right">
                 <ScrollViewer>
-                    <StackPanel>
+                    <StackPanel x:Name="Design">
                         <Label Content="Design"/>
 
                         <GroupBox Header="Countdown">
-                            <CheckBox Content="Enable countdown" x:Name="Countdown"/>
+                            <CheckBox Content="Enable countdown"/>
                         </GroupBox>
 
                         <GroupBox Header="Misc Toggles" Height="auto">
                             <StackPanel>
-                                <CheckBox Content="Widescreen Support" x:Name="Widescreen"/>
-                                <CheckBox Content="Display storyboard in front" x:Name="StoryFront"/>
-                                <CheckBox Content="Display epilepsy warning" x:Name="Epilepsy"/>
-                                <CheckBox Content="Letterbox during breaks" x:Name="LetterboxBreaks"/>
+                                <CheckBox Content="Widescreen Support"/>
+                                <CheckBox Content="Display storyboard in front"/>
+                                <CheckBox Content="Display epilepsy warning"/>
+                                <CheckBox Content="Letterbox during breaks"/>
                             </StackPanel>
                         </GroupBox>
 

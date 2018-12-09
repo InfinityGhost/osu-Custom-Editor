@@ -83,6 +83,7 @@ namespace osu__Custom_Editor_v2
         public async Task LoadFile(string filename)
         {
             await Editor.Load(filename);
+            Settings.Beatmap = Editor.Beatmap;
         }
 
         // Saving
@@ -115,7 +116,7 @@ namespace osu__Custom_Editor_v2
 
         async void LoadTestFile(object sender, RoutedEventArgs e)
         {
-            await Editor.Load(@"E:\osu!\Songs\818406 CLIFF EDGE - Endless Tears feat Nakamura Maiko\CLIFF EDGE - Endless Tears feat. Nakamura Maiko (Modem) [Suffering].osu");
+            await LoadFile(@"E:\osu!\Songs\818406 CLIFF EDGE - Endless Tears feat Nakamura Maiko\CLIFF EDGE - Endless Tears feat. Nakamura Maiko (Modem) [Suffering].osu");
         }
 
         async void GetBGImage(object sender, RoutedEventArgs e)

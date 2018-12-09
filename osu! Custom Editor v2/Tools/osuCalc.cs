@@ -31,5 +31,12 @@ namespace osu__Custom_Editor_v2.Tools
             else
                 throw new ArgumentException();
         }
+
+        public static float ConvertFloat(object value)
+        {
+            float y;
+            float.TryParse(value.ToString(), out y);
+            return y;
+        }
     }
 }

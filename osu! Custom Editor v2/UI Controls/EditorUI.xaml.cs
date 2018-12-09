@@ -74,6 +74,12 @@ namespace osu__Custom_Editor_v2
             }
         }
 
+        public OsuParsers.Beatmaps.Beatmap Beatmap
+        {
+            get => Editor.Beatmap;
+            set => Editor.Beatmap = value;
+        }
+
         #endregion
 
         #region Methods
