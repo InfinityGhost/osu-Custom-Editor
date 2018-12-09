@@ -45,7 +45,5 @@ namespace osu__Custom_Editor_v2
             }
         }
         private Beatmap _beatmap;
-
-
     }
 }

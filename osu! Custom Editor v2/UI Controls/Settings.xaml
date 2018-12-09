@@ -66,14 +66,14 @@
                         <GroupBox Header="Romanized Artist">
                             <TextBox Text="{Binding Artist, Mode=TwoWay}"/>
                         </GroupBox>
-                        <GroupBox Header="Difficulty">
+                        <GroupBox Header="Difficulty / Version">
                             <TextBox Text="{Binding Version, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Source">
                             <TextBox Text="{Binding Source, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Tags">
-                            <TextBox Text="{Binding TagsString, Mode=TwoWay}"/>
+                            <TextBox Text="{Binding TagsString, Mode=TwoWay}" Width="229"/>
                         </GroupBox>
 
                     </StackPanel>
@@ -87,16 +87,16 @@
                             <Label Content="Difficulty"/>
 
                             <GroupBox Header="HP Drain Rate">
-                                <Slider/>
+                                <Slider Value="{Binding HPDrainRate, Mode=TwoWay}"/>
                             </GroupBox>
                             <GroupBox Header="Circle Size">
-                                <Slider/>
+                                <Slider Value="{Binding CircleSize, Mode=TwoWay}"/>
                             </GroupBox>
                             <GroupBox Header="Approach Rate">
-                                <Slider/>
+                                <Slider Value="{Binding ApproachRate, Mode=TwoWay}"/>
                             </GroupBox>
                             <GroupBox Header="Overall Difficulty">
-                                <Slider/>
+                                <Slider Value="{Binding OverallDifficulty, Mode=TwoWay}"/>
                             </GroupBox>
 
 
@@ -110,11 +110,11 @@
                             <Label Content="Advanced"/>
 
                             <GroupBox Header="Stack Leniency">
-                                <Slider/>
+                                <Slider Value="{Binding StackLeniency}"/>
                             </GroupBox>
 
                             <GroupBox Header="Mode">
-                                <ComboBox SelectedIndex="0">
+                                <ComboBox SelectedIndex="{Binding ModeId}">
                                     <ComboBoxItem Content="osu!"/>
                                     <ComboBoxItem Content="osu!taiko"/>
                                     <ComboBoxItem Content="osu!catch"/>
@@ -138,10 +138,10 @@
 
                         <GroupBox Header="Misc Toggles" Height="auto">
                             <StackPanel>
-                                <CheckBox Content="Widescreen Support"/>
-                                <CheckBox Content="Display storyboard in front"/>
-                                <CheckBox Content="Display epilepsy warning"/>
-                                <CheckBox Content="Letterbox during breaks"/>
+                                <CheckBox Content="Widescreen Support" IsChecked="{Binding WidescreenStoryboard}"/>
+                                <CheckBox Content="Display storyboard in front" IsChecked="{Binding StoryFireInFront}"/>
+                                <CheckBox Content="Display epilepsy warning" IsChecked="{Binding EpilepsyWarning}"/>
+                                <CheckBox Content="Letterbox during breaks" IsChecked="{Binding LetterboxInBreaks}"/>
                             </StackPanel>
                         </GroupBox>
 
