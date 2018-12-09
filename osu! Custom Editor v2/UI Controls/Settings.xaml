@@ -76,7 +76,7 @@
                             <TextBox Text="{Binding Source, Mode=TwoWay}"/>
                         </GroupBox>
                         <GroupBox Header="Tags">
-                            <TextBox Text="{Binding TagsString, Mode=TwoWay}" Width="229"/>
+                            <TextBox Text="{Binding TagsString, Mode=TwoWay}" Width="231"/>
                         </GroupBox>
 
                     </StackPanel>
